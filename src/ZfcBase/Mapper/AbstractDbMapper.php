@@ -8,8 +8,8 @@ use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\TableIdentifier;
-use Zend\Stdlib\Hydrator\HydratorInterface;
-use Zend\Stdlib\Hydrator\ClassMethods;
+use Laminas\Hydrator\HydratorInterface;
+use Laminas\Hydrator\ClassMethodsHydrator;
 use ZfcBase\EventManager\EventProvider;
 use ZfcBase\Db\Adapter\MasterSlaveAdapterInterface;
 
@@ -81,7 +81,7 @@ abstract class AbstractDbMapper extends EventProvider
         }
 
         if (!$this->hydrator instanceof HydratorInterface) {
-            $this->hydrator = new ClassMethods;
+            $this->hydrator = new ClassMethodsHydrator;
         }
 
         if (!is_object($this->entityPrototype)) {
@@ -257,7 +257,7 @@ abstract class AbstractDbMapper extends EventProvider
     public function getHydrator()
     {
         if (!$this->hydrator) {
-            $this->hydrator = new ClassMethods(false);
+            $this->hydrator = new ClassMethodsHydrator(false);
         }
         return $this->hydrator;
     }
